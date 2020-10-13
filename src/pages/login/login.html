@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-navbar>
+	<ion-buttons left>
+  		<button ion-button (click)='viewCtrl.dismiss(false)'>
+  			Cerrar
+  		</button>
+  	</ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<ion-list>
+	  <ion-item *ngIf='quiereRegistrarse'>
+	    <ion-label stacked>Nombre</ion-label>
+	    <ion-input type="text" [(ngModel)]='nombre'></ion-input>
+	  </ion-item>
+	  <ion-item *ngIf='quiereRegistrarse'>
+	    <ion-label stacked>Apellido</ion-label>
+	    <ion-input type="text" [(ngModel)]='apellido'></ion-input>
+	  </ion-item>
+	  <ion-item>
+	    <ion-label stacked>Username <span>*</span></ion-label>
+	    <ion-input type="email" [(ngModel)]='correo'></ion-input>
+	  </ion-item>
+	  <ion-item>
+	    <ion-label stacked>Password <span>*</span></ion-label>
+	    <ion-input type="password" [(ngModel)]='password'></ion-input>
+	    <span *ngIf='ingreseContrasena'>Ingrese una contraseña</span>
+	  </ion-item>
+	  <ion-item *ngIf='false'>
+	    <ion-label stacked>Password <span>*</span></ion-label>
+	    <ion-input type="password" [(ngModel)]='password'></ion-input>
+	    <span *ngIf='ingreseContrasena'>Ingrese una contraseña</span>
+	  </ion-item>
+	</ion-list>
+	<button ion-button block color='primary' (click)='ingresar()' [disabled]='correo.length < 5 || password.length < 5'>
+		<span *ngIf='!quiereRegistrarse'>Ingresar</span>
+		<span *ngIf='quiereRegistrarse'>Regristrarse</span>
+	</button>
+
+	<ion-row>
+	    <ion-col class='top-5'>
+	    	<button ion-button color='facebook' icon-left block (click)="loginFb()" [disabled]='!quiereRegistrarse'> 
+	    		<ion-icon name='logo-facebook' ></ion-icon>Facebook
+	    	</button>
+		</ion-col>
+	    <ion-col class='top-5'>
+	    	<button ion-button color='google' icon-left block [disabled]='!quiereRegistrarse'> 
+	    		<ion-icon name='logo-google'></ion-icon>Google
+	    	</button>
+		</ion-col>
+	</ion-row>
+    <ion-row style='margin-top: 20%'>
+      <ion-col>	
+        <span class="divider line one-line">¿No sos usuario?</span>
+        <button ion-button block class="registrate" [ngClass]="quiereRegistrarse ? 'esUsuario' : 'registrate'" [navPush]='registrarse' (click)='quiereRegistrarse = !quiereRegistrarse'>
+        <span *ngIf='!quiereRegistrarse'>Registrate</span>
+        <span *ngIf='quiereRegistrarse'>Soy Usuario</span>
+    	</button>
+      </ion-col>
+    </ion-row>
+</ion-content>

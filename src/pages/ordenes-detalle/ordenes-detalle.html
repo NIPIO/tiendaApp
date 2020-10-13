@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Orden {{ ordenDetalle[0].orden_id }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content text-center>
+  <ion-list>
+    <ion-item *ngFor="let item of ordenDetalle" [navPush]='productoPage' [navParams]='{producto: item }'>
+      <img src='{{rutaImg}}{{item.codigo}}.jpg'>
+      <h5>{{ item.producto }}</h5>
+      <p>
+        {{ item.descripcion }}
+      </p>
+      <p>
+        {{ item.precio_compra | currency:'USD':true }}
+      </p>
+    </ion-item>
+  </ion-list>
+  <button ion-button block color="danger" (click)="borrarPedido(ordenDetalle[0].orden_id)">
+    Borrar orden
+  </button>
+</ion-content>
